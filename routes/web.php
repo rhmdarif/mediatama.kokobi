@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Route::get('/dashboard', function () {

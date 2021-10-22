@@ -16,6 +16,7 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="{{ route('home') }}" {{ Route::currentRouteName() == "home"? 'class=active' : "" }}>Beranda</a></li>
+                            <li><a href="{{ route('tranding') }}" {{ Route::currentRouteName() == "tranding"? 'class=active' : "" }}>Tranding</a></li>
                             <li><a href="{{ route('group') }}" {{ Route::currentRouteName() == "group"? 'class=active' : "" }}>Grup</a></li>
                             @auth
                                 <li><a href="{{ route('user') }}" {{ Route::currentRouteName() == "user"? 'class=active' : "" }}>Pengguna</a></li>

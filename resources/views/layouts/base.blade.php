@@ -28,12 +28,13 @@
             align-items: center;
             justify-content: center;
             background-size: cover; */
-            background-image: linear-gradient(127deg, #fcfaa1 0%, #f0ec1c  91%);
+            background-color: #faf05f;
+            /* background-image: linear-gradient(127deg, #fcfaa1 0%, #f0ec1c  91%); */
             left: 0;
             right: 0;
             top: 0;
             bottom: 0;
-            position: relative;
+            position: relatife;
             color: #fff;
         }
     </style>

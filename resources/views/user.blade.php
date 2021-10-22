@@ -2,7 +2,7 @@
 @section('contents')
 
 
-<section class="section padding-bottom-0 cust-bg">
+<section class="section padding-bottom-0 cust-bg" style="min-height: 50em;">
 
     <div class="container padding-bottom-80 padding-top-80">
         <div class="features-small-item">

@@ -13,7 +13,7 @@
 @endpush
 @section('contents')
 
-<section class="section padding-bottom-0 cust-bg">
+<section class="section padding-bottom-0 cust-bg" style="min-height: 50em;">
 
     <div class="container padding-bottom-80">
         <div class="row" style="margin-top: 100px;">

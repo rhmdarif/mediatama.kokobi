@@ -50,6 +50,10 @@ Route::get('user', [UserController::class, 'index'])->middleware('auth')->name('
 
 
 Route::prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('admin.home');
+    });
+
     Route::get('login', [LoginController::class, 'index'])->name('login.index');
     Route::post('login', [LoginController::class, 'store'])->name('login.store');
 

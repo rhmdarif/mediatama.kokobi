@@ -43,7 +43,7 @@
 
     <!-- ***** Preloader Start ***** -->
     <div id="preloader" style="background-image: linear-gradient(
-        127deg, #8fc4f1 0%, #3566d1 91%);">
+        127deg, #fcfaa1 0%, #f0ec1c  91%);">
         <div class="jumper">
             <div></div>
             <div></div>

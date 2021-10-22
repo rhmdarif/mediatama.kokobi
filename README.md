@@ -13,6 +13,7 @@ Merupakan aplikasi diskusi secara anonim, sehingga privasi setiap orang terjaga 
 - Suka/Tidak Suka
 - Salin Link
 - Grafik Reaksi
+### URL : **[https://kokobi.id/](https://kokobi.id/)**
 
 ### Pembuat
 

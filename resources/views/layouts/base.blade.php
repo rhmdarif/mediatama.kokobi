@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ url('/') }}/assets/css/templatemo-softy-pinko.css">
     <style>
         .cust-bg {
-            background-image: url('{{ url('/') }}/assets/images/bg.jpg');
+            /* background-image: url('{{ url('/') }}/assets/images/bg.jpg');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
@@ -27,7 +27,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-size: cover;
+            background-size: cover; */
+            background-image: linear-gradient(127deg, #fcfaa1 0%, #f0ec1c  91%);
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            position: relative;
+            color: #fff;
         }
     </style>
     <style>

@@ -74,10 +74,10 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
         Route::prefix('group')->as('group.')->group(function () {
             Route::get('/', [AdminGroupController::class, 'index'])->name('index');
+            Route::get('/create', [AdminGroupController::class, 'create'])->name('create');
             Route::get('/{id}', [AdminGroupController::class, 'show'])->name('show');
             Route::put('/{id}', [AdminGroupController::class, 'update'])->name('update');
             Route::delete('/{id}', [AdminGroupController::class, 'destroy'])->name('destroy');
-            Route::get('/create', [AdminGroupController::class, 'create'])->name('create');
             Route::post('/', [AdminGroupController::class, 'store'])->name('store');
         });
 

@@ -14,9 +14,9 @@
                     <form class="user" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <input type="email" name="email" value="{{ old('email') ?? '' }}" class="form-control form-control-user"
+                            <input type="tel" name="email" value="{{ old('email') ?? '' }}" class="form-control form-control-user"
                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                placeholder="Enter Email Address...">
+                                placeholder="Enter Phone Number">
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" class="form-control form-control-user"

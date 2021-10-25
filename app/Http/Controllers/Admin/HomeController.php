@@ -18,10 +18,11 @@ class HomeController extends Controller
     {
         for ($i=11; $i >= 0; $i--) {
             $strtime= strtotime("-".$i." month", time());
-            $query[] = DB::table('topics')->where("created_at", "like", date("%-m-%", $strtime))->count();
+            $topic[] = DB::table('topics')->where("created_at", "like", date("%-m-%", $strtime))->count();
+            $comment[] = DB::table('topic_comments')->where("created_at", "like", date("%-m-%", $strtime))->count();
             $months[] = date("F", $strtime);
         }
-        return ['data' => $query, "label" => $months];
+        return ['data' => ['topics' => $topic, 'comment' => $comment], "label" => $months];
     }
 
     public function chartPie()

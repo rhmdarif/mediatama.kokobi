@@ -144,64 +144,59 @@
 
     function chartBatang() {
         $.get("{{ route('admin.data.batang') }}", (result) => {
+            console.log(result)
 
             var areaChartData = {
                 labels  : result.label,
                 datasets: [
                     {
-                    label               : 'Komentar',
-                    backgroundColor     : 'rgba(60,141,188,0.9)',
-                    borderColor         : 'rgba(60,141,188,0.8)',
-                    pointRadius          : false,
-                    pointColor          : '#3b8bba',
-                    pointStrokeColor    : 'rgba(60,141,188,1)',
-                    pointHighlightFill  : '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data                : result.data
-                    }
-                    // {
-                    //   label               : 'Electronics',
-                    //   backgroundColor     : 'rgba(210, 214, 222, 1)',
-                    //   borderColor         : 'rgba(210, 214, 222, 1)',
-                    //   pointRadius         : false,
-                    //   pointColor          : 'rgba(210, 214, 222, 1)',
-                    //   pointStrokeColor    : '#c1c7d1',
-                    //   pointHighlightFill  : '#fff',
-                    //   pointHighlightStroke: 'rgba(220,220,220,1)',
-                    //   data                : [65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40]
-                    // },
+                        label               : 'Topic',
+                        backgroundColor     : 'rgba(60,141,188,0.9)',
+                        borderColor         : 'rgba(60,141,188,0.8)',
+                        pointRadius          : false,
+                        pointColor          : '#3b8bba',
+                        pointStrokeColor    : 'rgba(60,141,188,1)',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data                : result.data.topics
+                    },
+                    {
+                        label               : 'Komentar',
+                        backgroundColor     : 'rgba(210, 214, 222, 1)',
+                        borderColor         : 'rgba(210, 214, 222, 1)',
+                        pointRadius         : false,
+                        pointColor          : 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor    : '#c1c7d1',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data                : result.data.comment
+                    },
                 ]
             }
             var barChartData = $.extend(true, {}, areaChartData)
             var temp0 = areaChartData.datasets[0]
-            // var temp1 = areaChartData.datasets[1]
+            var temp1 = areaChartData.datasets[1]
             barChartData.datasets[0] = temp0
-            // barChartData.datasets[1] = temp0
+            barChartData.datasets[1] = temp1
 
             //---------------------
             //- STACKED BAR CHART -
             //---------------------
-            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-            var stackedBarChartData = $.extend(true, {}, barChartData)
+            var BarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var BarChartData = $.extend(true, {}, barChartData)
 
-            var stackedBarChartOptions = {
-                responsive              : true,
-                maintainAspectRatio     : false,
-                scales: {
-                xAxes: [{
-                    stacked: true,
-                }],
-                yAxes: [{
-                    stacked: true
-                }]
+
+            var barChartOptions = {
+                    responsive              : true,
+                    maintainAspectRatio     : false,
+                    datasetFill             : false
                 }
-            }
 
-            new Chart(stackedBarChartCanvas, {
-                type: 'bar',
-                data: stackedBarChartData,
-                options: stackedBarChartOptions
-            })
+                new Chart(BarChartCanvas, {
+                    type: 'bar',
+                    data: barChartData,
+                    options: barChartOptions
+                })
         })
     }
   </script>

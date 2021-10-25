@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class TopicContoller extends Controller
 {
@@ -107,7 +107,7 @@ class TopicContoller extends Controller
 
         for ($i=11; $i >= 0; $i--) {
             $strtime= strtotime("-".$i." month", time());
-            $query[] = DB::table('topics')->where('id', $id)->where("created_at", "like", date("%-m-%", $strtime))->count();
+            $query[] = DB::table('topic_comments')->where('topic_id', $id)->where("created_at", "like", date("%-m-%", $strtime))->count();
             $months[] = date("F", $strtime);
         }
         return ['data' => $query, "label" => $months];

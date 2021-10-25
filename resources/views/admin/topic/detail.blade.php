@@ -235,6 +235,7 @@
 
         function chartBatang() {
             $.get("{{ route('admin.topic.data.batang', $url) }}", (result) => {
+                console.log(result);
 
                 var areaChartData = {
                     labels: result.label,

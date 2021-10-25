@@ -19,7 +19,7 @@
                         <td>081234567</td>
                     </tr> --}}
                     <tr>
-                        <th>Email</th>
+                        <th>No Telp</th>
                         <td>{{ auth()->user()->email }}</td>
                     </tr>
                     {{-- <tr>

@@ -44,9 +44,8 @@
                               <tr>
                                   <th width="5%">#</th>
                                   <th>Nama</th>
-                                  <th>Email</th>
+                                  <th>No. Telp</th>
                                   <th width="30%">Jumlah Kiriman</th>
-                                  <th width="15%">Aksi</th>
                               </tr>
                           </thead>
 
@@ -60,18 +59,6 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->total_topic }}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                          <a href="{{ route('admin.topic.byUser', $item->id) }}" class="btn btn-default">Lihat Kiriman</a>
-                                          <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                          </button>
-                                          <div class="dropdown-menu p-1" role="menu">
-                                            <a class="dropdown-item bg-warning" href="#" onclick="openEditModal({{ $item->id }})">Edit</a>
-                                            <a class="dropdown-item bg-danger" href="#" onclick="openDeleteModal({{ $item->id }})">Hapus</a>
-                                          </div>
-                                        </div>
-                                    </td>
                                 </tr>
                               @endforeach
                           </tbody>
@@ -90,29 +77,4 @@
     </section>
     <!-- /.content -->
 
-    @include('admin.user.modal-edit')
-    @include('admin.user.modal-delete')
 @endsection
-@push('js')
-    <script>
-        function  openEditModal(id) {
-            $.get("{{ route('admin.user.index') }}/"+id, (result) => {
-                console.log(result);
-                if(result.length != 0) {
-                    $('#modalEdit input[name=name]').val(result.name);
-                    $('#modalEdit input[name=email]').val(result.email);
-                    $('#modalEdit form').attr('action', "{{ route('admin.user.index') }}/"+id);
-                    $('#modalEdit').modal('show');
-                }
-            })
-        }
-        function  openDeleteModal(id) {
-            $.get("{{ route('admin.user.index') }}/"+id, (result) => {
-                if(result.length != 0) {
-                    $('#modalDelete form').attr('action', "{{ route('admin.user.index') }}/"+id);
-                    $('#modalDelete').modal('show');
-                }
-            })
-        }
-    </script>
-@endpush

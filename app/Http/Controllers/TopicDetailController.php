@@ -75,7 +75,8 @@ class TopicDetailController extends Controller
                 'topic_id' => $request->topic,
                 'user_id' => auth()->user()->id ?? null,
                 'comment' => $request->comment,
-                'device_id' => $request->device_id
+                'device_id' => $request->device_id,
+                'created_at' => date("Y-m-d H:i:s")
             ]);
 
         return ['status' => true, 'msg' => "Comment telah dibuat"];

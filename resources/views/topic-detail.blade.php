@@ -129,7 +129,7 @@
                                     }
 
                                 </style>
-                                <img class="pull-right m-3 {{ $comment->device_id }}" onclick="deleteComment({{ $comment->id }})" style="display:none;bottom: 0;" src="http://mediatamaforum.test/assets/images/trash.png" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js" width="20" alt="Dibagikan">
+                                {{-- <img class="pull-right m-3 {{ $comment->device_id }}" onclick="deleteComment({{ $comment->id }})" style="display:none;bottom: 0;" src="http://mediatamaforum.test/assets/images/trash.png" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js" width="20" alt="Dibagikan"> --}}
 
                                 <div style="margin-top: 25px;
                                 padding-left: 25px;
@@ -200,7 +200,7 @@
             DeviceID = result;
             $('#device_id').val(result);
             console.log(DeviceID);
-            $(`.${ DeviceID }`).show();
+            // $(`.${ DeviceID }`).show();
         });
 
         function like() {

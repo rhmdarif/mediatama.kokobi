@@ -91,22 +91,25 @@
                             margin-bottom: 10px;
                         }
                     </style>
-                    <h4 class="mb-3">
-                        <i><img src="assets/images/testimonial-icon.png" alt=""></i> Komentar
-                    </h4>
-                    <div class="team-item p-4">
-                        <form action="{{ route('topic.comment.store', $url) }}" method="post">
-                            @csrf
-                            <input type="hidden" name="topic" value="{{ $topic->id }}">
-                            <input type="hidden" name="device_id" id="device_id">
-                            <div class="form-group">
-                                <!-- <label for="komentar">Komentar</label> -->
-                                <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-rounded btn-primary pull-right">Kirim</button>
-                        </form>
-                        <br>
-                    </div>
+
+                    @if (isset($topic->expired_at) && time() < strtotime($topic->expired_at))
+                        <h4 class="mb-3">
+                            <i><img src="assets/images/testimonial-icon.png" alt=""></i> Komentar
+                        </h4>
+                        <div class="team-item p-4">
+                            <form action="{{ route('topic.comment.store', $url) }}" method="post">
+                                @csrf
+                                <input type="hidden" name="topic" value="{{ $topic->id }}">
+                                <input type="hidden" name="device_id" id="device_id">
+                                <div class="form-group">
+                                    <!-- <label for="komentar">Komentar</label> -->
+                                    <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-rounded btn-primary pull-right">Kirim</button>
+                            </form>
+                            <br>
+                        </div>
+                    @endif
                     @foreach ($topic_comments as $comment)
                         <div class="team-item">
                             <div class="team-content">

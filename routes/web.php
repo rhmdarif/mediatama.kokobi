@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\TopicContoller as AdminTopicContoller;
 use App\Http\Controllers\Admin\GroupController as AdminGroupController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\UserGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,8 @@ Route::get('t/{url}', [TopicDetailController::class, 'index'])->name('topic.deta
 Route::post('t/{url}', [TopicDetailController::class, '_store'])->name('topic.comment.store');
 
 Route::get('group', [GroupController::class, 'index'])->name('group');
-Route::get('g/{url}', [GroupController::class, 'posts'])->name('group.posts');
+Route::get('g/{id}', [GroupController::class, 'posts'])->name('group.posts')->middleware('checkPasscode');
+Route::post('g/join', [GroupController::class, 'join'])->name('group.join');
 
 Route::get('user', [UserController::class, 'index'])->middleware('auth')->name('user');
 
@@ -79,6 +81,13 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::put('/{id}', [AdminGroupController::class, 'update'])->name('update');
             Route::delete('/{id}', [AdminGroupController::class, 'destroy'])->name('destroy');
             Route::post('/', [AdminGroupController::class, 'store'])->name('store');
+
+
+            Route::get('/{group_id}/users', [UserGroupController::class, 'index'])->name('user.index');
+            Route::get('/{group_id}/users/acc/{id}', [UserGroupController::class, 'accept_request'])->name('user.accept');
+            Route::get('/{group_id}/users/dec/{id}', [UserGroupController::class, 'decline_request'])->name('user.decline');
+            Route::get('/{group_id}/not_join', [UserGroupController::class, 'users_not_this_group'])->name('user.not_join');
+            Route::post('/{group_id}/not_join', [UserGroupController::class, 'add_users'])->name('user.add_users');
         });
 
         Route::prefix('user')->as('user.')->group(function () {

@@ -78,8 +78,8 @@
                                 <img src="http://placehold.it/60x60" alt="">
                             </div>
                             <div class="team-info">
-                                <h3 class="user-name">{{ $topic->user_name }}</h3>
-                                <span>Managing Director</span>
+                                <h3 class="user-name m-2">{{ $topic->user_name }}</h3>
+                                {{-- <span>Managing Director</span> --}}
                             </div>
                         </div>
                     </div>
@@ -144,8 +144,12 @@
                                 </div>
 
                                 <div class="team-info">
-                                    <h3 class="user-name">{{ $comment->user_name ?? "Anonim" }}</h3>
-                                    <span>At 2 minutes ago.</span>
+                                    <span>At
+                                        @if (substr($comment->created_at, 0, 10) == date("Y-m-d"))
+                                            {{ trim(substr($comment->created_at, 10)) }}
+                                        @else
+                                            {{ $comment->created_at }}
+                                        @endif</span>
                                 </div>
                             </div>
                         </div>

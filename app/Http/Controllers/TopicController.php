@@ -17,10 +17,13 @@ class TopicController extends Controller
 
     public function store(Request $request)
     {
+        // return $request->all();
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'content' => 'required|string',
             'category' => 'required|exists:groups,id',
+            'exp_date' => 'required|date',
+            'exp_time' => 'required|date_format:H:i'
         ]);
 
         if($validator->fails()) {
@@ -32,6 +35,7 @@ class TopicController extends Controller
             'group_id' => $request->category,
             'title' => $request->title,
             'body' => $request->content,
+            'expired_at' => $request->exp_date." ".$request->exp_time.":00",
             'created_at' => date("Y-m-d H:i:s")
         ]);
 

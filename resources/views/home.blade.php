@@ -11,6 +11,52 @@
 
     <title>{{ env('APP_NAME') }}</title>
 @endpush
+
+@push('css')
+
+<script>
+    function countDown(elementId, expired) {
+        console.log(elementId);
+        // Set the date we're counting down to
+        var countDownDate = new Date(expired).getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            let show = "";
+            if(days > 0)
+                show +=  days + "d ";
+            if(hours > 0)
+                show +=  hours + "h ";
+            if(minutes > 0)
+                show +=  minutes + "m ";
+
+            show +=  seconds + "s ";
+
+            document.getElementById(elementId).innerHTML = show;
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById(elementId).innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    }
+</script>
+@endpush
 @section('contents')
 
 <section class="section padding-bottom-0 cust-bg" style="min-height: 50em;">
@@ -35,18 +81,25 @@
 
                             <div class="col-12">
                                 @foreach ($latest_topics as $item)
-                                    @php
-                                        $time_explode = explode(':', $item->selisih);
-
-                                        list($h, $i, $s) = $time_explode;
-                                    @endphp
                                     <a href="/t/{{ date("Y", strtotime($item->created_at)) }}{{ $item->id }}-{{ str_replace('+', '-', urlencode($item->title))  }}" class="card mb-3">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-lg-2 col-md-3 col-4 align-self-center text-center text-black"
                                                     style="color: black !important;">
-                                                    <h3 class="mb-4">{{ (int)$h > 0? (((int)$h / 24) >= 1 ? floor((int)$h/24).'h '.round((((int)$h/24) - floor((int)$h/24))*24).'j ': round((int) $h).'j ' ) : '' }} {{ (int) $i }}m</h3>
-                                                    <span class="text-black">left to launch</span>
+                                                    @if ($item->status == "active")
+                                                        <script> countDown('h3_{{ $item->id }}', '{{ $item->expired_at }}') </script>
+                                                        <h4 class="mb-4" id="h3_{{ $item->id }}"></h4>
+                                                        <span class="text-black">to expired</span>
+                                                    @else
+                                                        <h3 class="mb-4">Expired</h3>
+                                                        <span class="text-black">at
+                                                            @if (substr($item->expired_at, 0, 10) == date("Y-m-d"))
+                                                                {{ trim(substr($item->expired_at, 10)) }}
+                                                            @else
+                                                                {{ date("d M Y H:i:s", strtotime($item->expired_at)) }}
+                                                            @endif
+                                                        </span>
+                                                    @endif
                                                 </div>
                                                 <div class="col-lg-10 col-md-9 col-8 align-self-center mobile-top-fix">
                                                     <div class="left-heading mt-4">
@@ -55,9 +108,9 @@
                                                     <div class="left-text pr-1">
                                                         {{-- @dd(strlen($item->body)) --}}
                                                         @if (strlen($item->body) >= 250)
-                                                            {{ firstwords_2($item->body, 250) }}
+                                                            {!! firstwords_2(strip_tags($item->body), 250) !!}
                                                         @else
-                                                            {{ $item->body }}
+                                                            {!! strip_tags($item->body) !!}
                                                         @endif
                                                         {{-- <p>{{ (strlen($item->body) > 5)? (substr($item->body, strrpos(substr($item->body, 0, 5), ' ')).".....") : $item->body }}</p> --}}
                                                     </div>

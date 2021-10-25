@@ -79,9 +79,9 @@
                                     <div class="left-text pr-1">
                                         {{-- @dd(strlen($item->body)) --}}
                                         @if (strlen($item->body) >= 250)
-                                            {{ firstwords_2($item->body, 250) }}
+                                            {!! firstwords_2($item->body, 250) !!}
                                         @else
-                                            {{ $item->body }}
+                                            {!! $item->body !!}
                                         @endif
                                         {{-- <p>{{ (strlen($item->body) > 5)? (substr($item->body, strrpos(substr($item->body, 0, 5), ' ')).".....") : $item->body }}</p> --}}
                                     </div>

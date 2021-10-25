@@ -17,6 +17,14 @@
                     <label for="name">Nama Group</label>
                     <input type="text" class="form-control" name="name" id="name">
                 </div>
+                <div class="form-group">
+                    <label for="passcode">Pass Code</label>
+                    <input type="text" class="form-control" name="passcode" id="passcode">
+                </div>
+                <div class="form-group">
+                    <label for="invite_code">Invite Code</label>
+                    <input type="text" class="form-control" name="invite_code" id="invite_code">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>

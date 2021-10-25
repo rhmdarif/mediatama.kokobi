@@ -22,6 +22,17 @@
                             <input type="text" class="form-control" name="title" required>
                         </div>
                         <div class="form-group">
+                            <label for="title">Berlaku Hingga</label>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="date" class="form-control" name="exp_date" required>
+                                </div>
+                                <div class="col">
+                                    <input type="time" class="form-control" name="exp_time" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="category">Category</label>
                             <select name="category" id="category" class="form-control" required>
                                 <option value="">Pilih Kategori</option>

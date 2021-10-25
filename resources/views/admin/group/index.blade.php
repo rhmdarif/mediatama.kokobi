@@ -45,7 +45,9 @@
                               <tr>
                                   <th width="5%">#</th>
                                   <th>Nama Group</th>
-                                  <th width="30%">Jumlah Kiriman</th>
+                                  <th width="10%">Jumlah Kiriman</th>
+                                  <th width="10%">Total Komentar</th>
+                                  <th width="10%">Permintaan Bergabung</th>
                                   <th width="15%">Aksi</th>
                               </tr>
                           </thead>
@@ -58,7 +60,9 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->total_topic }}</td>
+                                    <td>{{ $item->total_topic ?? 0 }}</td>
+                                    <td>{{ $item->total_komentar ?? 0 }}</td>
+                                    <td>{{ $item->total_request ?? 0 }}</td>
                                     <td>
                                         <div class="btn-group">
                                           <a href="{{ route('admin.topic.byGroup', $item->id) }}" class="btn btn-default">Lihat Kiriman</a>
@@ -66,6 +70,7 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                           </button>
                                           <div class="dropdown-menu p-1" role="menu">
+                                            <a class="dropdown-item" href="{{ route('admin.group.user.index', $item->id) }}">Lihat Peserta</a>
                                             <a class="dropdown-item bg-warning" href="#" onclick="openEditModal({{ $item->id }})">Edit</a>
                                             <a class="dropdown-item bg-danger" href="#" onclick="openDeleteModal({{ $item->id }})">Hapus</a>
                                           </div>
@@ -97,7 +102,10 @@
         function  openEditModal(id) {
             $.get("{{ route('admin.group.index') }}/"+id, (result) => {
                 if(result.length != 0) {
+                    $('#modalEdit .modal-title').text("Edit "+ result.name);
                     $('#modalEdit input[name=name]').val(result.name);
+                    $('#modalEdit input[name=passcode]').val(result.passcode);
+                    $('#modalEdit input[name=invite_code]').val(result.invite_code);
                     $('#modalEdit form').attr('action', "{{ route('admin.group.index') }}/"+id);
                     $('#modalEdit').modal('show');
                 }

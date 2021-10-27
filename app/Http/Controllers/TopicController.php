@@ -21,7 +21,7 @@ class TopicController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'content' => 'required|string',
-            'category' => 'required|exists:groups,id',
+            'category' => 'nullable|exists:groups,id',
             'exp_date' => 'required|date',
             'exp_time' => 'required|date_format:H:i'
         ]);

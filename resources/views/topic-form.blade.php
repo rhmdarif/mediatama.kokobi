@@ -34,8 +34,8 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select name="category" id="category" class="form-control" required>
-                                <option value="">Pilih Kategori</option>
+                            <select name="category" id="category" class="form-control">
+                                <option value="">Umum</option>
                                 @foreach ($categories as $item)
                                     <option value="{{ $item->id }}" {{ request()->get('category') == $item->id ? "selected" : "" }}>{{ $item->name }}</option>
                                 @endforeach

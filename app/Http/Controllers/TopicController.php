@@ -21,7 +21,7 @@ class TopicController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'content' => 'required|string',
-            'category' => 'nullable|exists:groups,id',
+            'category' => 'required|exists:groups,id',
             'exp_date' => 'required|date',
             'exp_time' => 'required|date_format:H:i'
         ]);
@@ -31,7 +31,7 @@ class TopicController extends Controller
         }
 
         $topic_id = DB::table('topics')->insertGetId([
-            'user_id' => auth()->user()->id ?? null,
+            'user_id' => auth()->user()->id,
             'group_id' => $request->category,
             'title' => $request->title,
             'body' => $request->content,

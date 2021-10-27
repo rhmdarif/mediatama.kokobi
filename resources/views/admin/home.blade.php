@@ -81,7 +81,7 @@
 @push('js')
 
 <!-- ChartJS -->
-<script src="assets/plugins/chart.js/Chart.min.js"></script>
+<script src="{{ asset('Admin') }}/assets/plugins/chart.js/Chart.min.js"></script>
 <script>
     $(function () {
       /* ChartJS

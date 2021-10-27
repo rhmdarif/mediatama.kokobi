@@ -22,12 +22,12 @@ class TopicDetailController extends Controller
         $topic = DB::table('topics')
                     ->select('topics.*',
                             'users.name as user_name',
-                            'groups.name as group_name',
                             DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=1) as jumlah_like"),
-                            DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as jumlah_dislike")
+                            DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as jumlah_dislike"),
+                            DB::raw("IF(topics.group_id IS NULL, 'Umum', (SELECT name FROM groups WHERE id=topics.group_id)) as group_name")
                         )
                     ->join('users', 'users.id', '=', 'topics.user_id')
-                    ->join('groups', 'groups.id', '=', 'topics.group_id')
+                    // ->join('groups', 'groups.id', '=', 'topics.group_id')
                     ->where('topics.id', $id)
                     ->first();
 

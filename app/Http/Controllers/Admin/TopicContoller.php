@@ -16,10 +16,12 @@ class TopicContoller extends Controller
                             "topics.*",
                             "groups.name as group_name",
                             DB::raw("(SELECT COUNT(*) FROM topic_comments WHERE topic_id=topics.id) as total_comments"),
-                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id) as total_likes")
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type='1') as total_likes"),
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type='0') as total_dislikes")
                         )
                     ->join('groups', 'groups.id', '=', 'topics.group_id')
                     ->orderBy('id', 'desc')->paginate(10);
+
         return view('admin.topic.index', compact('topics'));
     }
     public function byGroup($id)
@@ -30,7 +32,8 @@ class TopicContoller extends Controller
                             "topics.*",
                             "groups.name as group_name",
                             DB::raw("(SELECT COUNT(*) FROM topic_comments WHERE topic_id=topics.id) as total_comments"),
-                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id) as total_likes")
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id) as total_likes"),
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as total_dislikes")
                         )
                     ->join('groups', 'groups.id', '=', 'topics.group_id')
                     ->where('group_id', $id)
@@ -45,7 +48,8 @@ class TopicContoller extends Controller
                             "topics.*",
                             "users.name as user_name",
                             DB::raw("(SELECT COUNT(*) FROM topic_comments WHERE topic_id=topics.id) as total_comments"),
-                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id) as total_likes")
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id) as total_likes"),
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as total_dislikes")
                         )
                     ->join('users', 'users.id', '=', 'topics.user_id')
                     ->where('user_id', $id)

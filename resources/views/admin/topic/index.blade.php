@@ -49,12 +49,13 @@
                                   @if (isset($user))
                                     <th rowspan="2" width="10%">Penulis</th>
                                   @endif
-                                  <th width="20%" colspan="2">Jumlah</th>
+                                  <th width="20%" colspan="3">Jumlah</th>
                                   <th rowspan="2">Posted At</th>
                                   <th width="15%" rowspan="2">Aksi</th>
                               </tr>
                               <tr>
-                                  <th width="10%">Like</th>
+                                  <th>Like</th>
+                                  <th>Unlike</th>
                                   <th>Comment</th>
                               </tr>
                           </thead>
@@ -74,6 +75,7 @@
                                         <td>{{ $item->user_name }}</td>
                                     @endif
                                     <td>{{ $item->total_likes }}</td>
+                                    <td>{{ $item->total_dislikes }}</td>
                                     <td>{{ $item->total_comments }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>

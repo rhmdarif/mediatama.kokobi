@@ -71,11 +71,9 @@
                             <div class="col">
                                 <h3>Latest Topic</h3>
                             </div>
-                            @auth
-                                <div class="col">
-                                    <a href="{{ route('topic.create.index') }}" class="pull-right main-button-slider">Buat Kolom</a>
-                                </div>
-                            @endauth
+                            <div class="col">
+                                <a href="{{ route('topic.create.index') }}" class="pull-right main-button-slider">Buat Kolom</a>
+                            </div>
                         </div>
                         <div class="row mt-3">
 

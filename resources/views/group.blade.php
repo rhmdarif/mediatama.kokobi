@@ -13,13 +13,7 @@
                     @include('components.client.alert', ['msg' => session('success'), 'type'=> 'success'])
                 @endif
             </div>
-            <!-- ***** Features Small Item Start ***** -->
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <a class="features-small-item" href="{{ route('group.posts', 'umum') }}">
-                    <h3 class="features-title mt-3" style="font-weight: bolder;font-size:24px;">Umum</h3>
-                </a>
-            </div>
-            <!-- ***** Features Small Item End ***** -->
+
                 @foreach ($groups as $item)
                     <!-- ***** Features Small Item Start ***** -->
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">

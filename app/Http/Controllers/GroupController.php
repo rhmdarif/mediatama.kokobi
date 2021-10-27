@@ -21,32 +21,17 @@ class GroupController extends Controller
 
     public function posts($group_id)
     {
-        // return $group_id;
-        if($group_id == "umum") {
-            $group = json_decode(json_encode(['id' => null]));
-            $latest_topics = DB::table('topics')
-                                ->select('*',
-                                        DB::raw("IF(now() < expired_at, 'active', 'expired') as status"),
-                                        DB::raw("timediff(now(), expired_at) as selisih"),
-                                        DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=1) as jumlah_like"),
-                                        DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as jumlah_dislike")
-                                    )
-                                ->whereNull("group_id")
-                                ->orderBy('created_at', 'desc')
-                                ->paginate(5);
-        } else {
-            $group = DB::table('groups')->where("id", $group_id)->first();
-            $latest_topics = DB::table('topics')
-                                ->select('*',
-                                        DB::raw("IF(now() < expired_at, 'active', 'expired') as status"),
-                                        DB::raw("timediff(now(), expired_at) as selisih"),
-                                        DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=1) as jumlah_like"),
-                                        DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as jumlah_dislike")
-                                    )
-                                ->whereRaw("group_id = (SELECT id FROM groups WHERE id=? LIMIT 1)", [$group_id])
-                                ->orderBy('created_at', 'desc')
-                                ->paginate(5);
-        }
+        $group = DB::table('groups')->where("id", $group_id)->first();
+        $latest_topics = DB::table('topics')
+                            ->select('*',
+                                    DB::raw("IF(now() < expired_at, 'active', 'expired') as status"),
+                                    DB::raw("timediff(now(), expired_at) as selisih"),
+                                    DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=1) as jumlah_like"),
+                                    DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as jumlah_dislike")
+                                )
+                            ->whereRaw("group_id = (SELECT id FROM groups WHERE id=? LIMIT 1)", [$group_id])
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(5);
         // return $group;
         return view('group-post', compact('latest_topics', 'group'));
     }

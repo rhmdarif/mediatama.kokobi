@@ -32,6 +32,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        @auth
                         <div class="form-group">
                             <label for="category">Category</label>
                             <select name="category" id="category" class="form-control">
@@ -41,6 +43,7 @@
                                 @endforeach
                             </select>
                         </div>
+                        @endauth
 
                         <div class="form-group">
                             <label for="content">Content</label>

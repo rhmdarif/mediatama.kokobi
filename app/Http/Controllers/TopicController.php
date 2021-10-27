@@ -31,7 +31,7 @@ class TopicController extends Controller
         }
 
         $topic_id = DB::table('topics')->insertGetId([
-            'user_id' => auth()->user()->id,
+            'user_id' => auth()->user()->id ?? null,
             'group_id' => $request->category,
             'title' => $request->title,
             'body' => $request->content,

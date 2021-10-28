@@ -8,8 +8,8 @@
                         <!-- ***** Logo Start ***** -->
                         <a href="#" class="logo">
                             <h4 style="color:black;font-weight: bold;margin-top: -10px;">
-                                <img src="{{ url('/') }}/assets/images/bi.png" width="50" class="mr-2" alt="Softy Pinko" />
-                                <span>Ko-Ko Kolom Komentar</span>
+                                <img src="{{ url('/') }}/assets/images/logo-koko.png" width="100" class="mr-2" alt="Softy Pinko" />
+                                {{-- <span>Ko-Ko Kolom Komentar</span> --}}
                             </h4>
                         </a>
                         <!-- ***** Logo End ***** -->

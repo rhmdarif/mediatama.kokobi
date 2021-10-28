@@ -13,7 +13,7 @@
             <div class="modal-body">
                 @csrf
                 @method('DELETE')
-                Apakah anda yakin ingin menghapus group ini?
+                Apakah anda yakin ingin menghapus user ini?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"  data-dismiss="modal">Tidak</button>

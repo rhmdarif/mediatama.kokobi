@@ -37,11 +37,15 @@ Route::post('t/share', [TopicDetailController::class, 'store_share'])->name('top
 
 Route::get('t/create', [TopicController::class, 'index'])->name('topic.create.index');
 Route::post('t/create', [TopicController::class, 'store'])->name('topic.create.store');
+Route::put('t/create', [TopicController::class, 'update']);
 
 Route::post('t/comment/rmv', [TopicDetailController::class, 'destroy'])->name('topic.comment.destroy');
 
 Route::get('t/{url}', [TopicDetailController::class, 'index'])->name('topic.detail');
 Route::post('t/{url}', [TopicDetailController::class, '_store'])->name('topic.comment.store');
+
+// Route::put('t/{url}', [TopicController::class, 'update'])->name('topic.update');
+Route::get('t/{url}/edit', [TopicController::class, 'edit'])->name('topic.edit');
 
 Route::get('group', [GroupController::class, 'index'])->name('group');
 Route::get('g/{id}', [GroupController::class, 'posts'])->name('group.posts')->middleware('checkPasscode');

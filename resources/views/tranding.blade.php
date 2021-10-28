@@ -1,5 +1,6 @@
 @extends('layouts.base')
 @push('meta')
+    <title>Topic in Trending</title>
     <meta property="og:site_name" content="{{ env('APP_NAME') }}">
     <meta property="og:title" content="Tranding in {{ date("F") }}" />
     <meta property="og:description" content="{{ env('APP_DESCRIPTION') ?? "" }}" />

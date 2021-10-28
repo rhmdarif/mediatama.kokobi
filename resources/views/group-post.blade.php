@@ -1,6 +1,7 @@
 @extends('layouts.base')
 
 @push('meta')
+    <title>Latest About {{ ucwords($group->name) }}</title>
     <meta property="og:site_name" content="{{ env('APP_NAME') }}">
     <meta property="og:title" content="Latest About {{ ucwords($group->name) }}" />
     <meta property="og:description" content="{{ env('APP_NAME') ?? "" }}" />
@@ -23,7 +24,7 @@
             var now = new Date().getTime();
 
             // Find the distance between now and the count down date
-            var distance = countDownDate - now;
+            var distance = Number(countDownDate) - Number(now);
 
             // Time calculations for days, hours, minutes and seconds
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));

@@ -1,4 +1,13 @@
 @extends('layouts.base')
+@push('meta')
+    <title>List Group</title>
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="List Group" />
+    <meta property="og:description" content="{{ env('APP_NAME') ?? "" }}" />
+    <meta property="og:image" itemprop="image" content="{{ env('APP_IMAGE') ?? "/assets/images/bi.png" }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:updated_time" content="{{ time() }}" />
+@endpush
 @section('contents')
 
 <section class="section padding-bottom-0 cust-bg" style="min-height: 50em;">

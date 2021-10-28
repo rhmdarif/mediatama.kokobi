@@ -1,5 +1,14 @@
 @extends('layouts.base')
 
+@push('meta')
+    <title>Buat Topic</title>
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="Buat Topic" />
+    <meta property="og:description" content="{{ env('APP_NAME') ?? "" }}" />
+    <meta property="og:image" itemprop="image" content="{{ env('APP_IMAGE') ?? "/assets/images/bi.png" }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:updated_time" content="{{ time() }}" />
+@endpush
 @section('contents')
 
 <section class="section padding-bottom-0 cust-bg" style="min-height: 50em;">
@@ -16,19 +25,23 @@
 
                     <form action="{{ route('topic.create.store') }}" method="post">
                         @csrf
+                        @if (isset($topic))
+                            @method("PUT")
+                            <input type="hidden" name="id" value="{{ $topic->id }}">
+                        @endif
 
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" name="title" required>
+                            <input type="text" class="form-control" name="title" value="{{ $topic->title ?? "" }}" required>
                         </div>
                         <div class="form-group">
                             <label for="title">Berlaku Hingga</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="date" class="form-control" name="exp_date" required>
+                                    <input type="date" class="form-control" name="exp_date" value="{{ ($topic->expired_at)? substr($topic->expired_at, 0, 10) : "" }}" required>
                                 </div>
                                 <div class="col">
-                                    <input type="time" class="form-control" name="exp_time" required>
+                                    <input type="time" class="form-control" name="exp_time" value="{{ ($topic->expired_at)? substr($topic->expired_at, 11, 5) : "" }}" required>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +52,11 @@
                             <select name="category" id="category" class="form-control">
                                 <option value="">Umum</option>
                                 @foreach ($categories as $item)
-                                    <option value="{{ $item->id }}" {{ request()->get('category') == $item->id ? "selected" : "" }}>{{ $item->name }}</option>
+                                    @if (isset($topic) && $topic->group_id == $item->id)
+                                        <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                    @else
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -47,7 +64,7 @@
 
                         <div class="form-group">
                             <label for="content">Content</label>
-                            <textarea class="form-control" id="content" name="content" rows="15" required></textarea>
+                            <textarea class="form-control" id="content" name="content" rows="15" required>{!! $topic->body ?? "" !!}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary pull-right">Publish</button>

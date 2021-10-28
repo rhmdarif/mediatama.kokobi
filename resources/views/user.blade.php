@@ -1,4 +1,13 @@
 @extends('layouts.base')
+@push('meta')
+    <title>Pengguna</title>
+    <meta property="og:site_name" content="{{ env('APP_NAME') }}">
+    <meta property="og:title" content="Pengguna" />
+    <meta property="og:description" content="{{ env('APP_NAME') ?? "" }}" />
+    <meta property="og:image" itemprop="image" content="{{ env('APP_IMAGE') ?? "/assets/images/bi.png" }}">
+    <meta property="og:type" content="website" />
+    <meta property="og:updated_time" content="{{ time() }}" />
+@endpush
 @section('contents')
 
 

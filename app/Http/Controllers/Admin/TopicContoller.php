@@ -14,14 +14,20 @@ class TopicContoller extends Controller
         $topics = DB::table('topics')
                     ->select(
                             "topics.*",
-                            "groups.name as group_name",
+                            "users.name as user_name",
+                            DB::raw("IFNULL((SELECT name FROM groups WHERE id=topics.group_id), 'umum') as group_name"),
                             DB::raw("(SELECT COUNT(*) FROM topic_comments WHERE topic_id=topics.id) as total_comments"),
                             DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type='1') as total_likes"),
-                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type='0') as total_dislikes")
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type='0') as total_dislikes"),
+                            DB::raw("IF(topics.group_id IS NULL, 0, (SELECT count(*) FROM users WHERE id IN (SELECT user_id FROM topic_comments WHERE topic_id=topics.id) AND id IN (SELECT user_id FROM user_groups WHERE group_id=topics.group_id))) as user_group_reaction"),
+                            DB::raw("IF(topics.group_id IS NULL, 0, (SELECT count(*) FROM users WHERE id NOT IN (SELECT user_id FROM topic_comments WHERE topic_id=topics.id) AND id IN (SELECT user_id FROM user_groups WHERE group_id=topics.group_id))) as user_group_noreaction"),
+                            // DB::raw("(SELECT count(*) FROM users WHERE id NOT IN (SELECT user_id FROM topic_comments WHERE topic_id=topics.id) AND id IN (SELECT user_id FROM user_groups WHERE group_id=topics.group_id) as user_group_noreaction")
                         )
-                    ->join('groups', 'groups.id', '=', 'topics.group_id')
-                    ->orderBy('id', 'desc')->paginate(10);
-
+                    ->join('users', 'users.id', '=', 'topics.user_id')
+                    // ->join('groups', 'groups.id', '=', 'topics.group_id')
+                    ->orderBy('id', 'desc')
+                    ->paginate(10);
+        // return $topics;
         return view('admin.topic.index', compact('topics'));
     }
     public function byGroup($id)
@@ -30,11 +36,15 @@ class TopicContoller extends Controller
         $topics = DB::table('topics')
                     ->select(
                             "topics.*",
+                            "users.name as user_name",
                             "groups.name as group_name",
                             DB::raw("(SELECT COUNT(*) FROM topic_comments WHERE topic_id=topics.id) as total_comments"),
                             DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id) as total_likes"),
-                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as total_dislikes")
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as total_dislikes"),
+                            DB::raw("IF(topics.group_id IS NULL, 0, (SELECT count(*) FROM users WHERE id IN (SELECT user_id FROM topic_comments WHERE topic_id=topics.id) AND id IN (SELECT user_id FROM user_groups WHERE group_id=topics.group_id))) as user_group_reaction"),
+                            DB::raw("IF(topics.group_id IS NULL, 0, (SELECT count(*) FROM users WHERE id NOT IN (SELECT user_id FROM topic_comments WHERE topic_id=topics.id) AND id IN (SELECT user_id FROM user_groups WHERE group_id=topics.group_id))) as user_group_noreaction"),
                         )
+                    ->join('users', 'users.id', '=', 'topics.user_id')
                     ->join('groups', 'groups.id', '=', 'topics.group_id')
                     ->where('group_id', $id)
                     ->orderBy('id', 'desc')->paginate(10);
@@ -47,9 +57,12 @@ class TopicContoller extends Controller
                     ->select(
                             "topics.*",
                             "users.name as user_name",
+                            DB::raw("IFNULL((SELECT name FROM groups WHERE id=topics.group_id), 'umum') as group_name"),
                             DB::raw("(SELECT COUNT(*) FROM topic_comments WHERE topic_id=topics.id) as total_comments"),
                             DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id) as total_likes"),
-                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as total_dislikes")
+                            DB::raw("(SELECT COUNT(*) FROM topic_likes WHERE topic_id=topics.id AND type=0) as total_dislikes"),
+                            DB::raw("IF(topics.group_id IS NULL, 0, (SELECT count(*) FROM users WHERE id IN (SELECT user_id FROM topic_comments WHERE topic_id=topics.id) AND id IN (SELECT user_id FROM user_groups WHERE group_id=topics.group_id))) as user_group_reaction"),
+                            DB::raw("IF(topics.group_id IS NULL, 0, (SELECT count(*) FROM users WHERE id NOT IN (SELECT user_id FROM topic_comments WHERE topic_id=topics.id) AND id IN (SELECT user_id FROM user_groups WHERE group_id=topics.group_id))) as user_group_noreaction"),
                         )
                     ->join('users', 'users.id', '=', 'topics.user_id')
                     ->where('user_id', $id)

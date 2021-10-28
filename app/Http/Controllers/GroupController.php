@@ -23,7 +23,7 @@ class GroupController extends Controller
     {
         $group = DB::table('groups')->where("id", $group_id)->first();
         $latest_topics = DB::table('topics')
-                            ->select('*',
+                            ->select('*', "groups.name as group_name",
                                     DB::raw("IF(now() < expired_at, 'active', 'expired') as status"),
                                     DB::raw("timediff(now(), expired_at) as selisih"),
                                     DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=1) as jumlah_like"),
@@ -32,7 +32,7 @@ class GroupController extends Controller
                             ->whereRaw("group_id = (SELECT id FROM groups WHERE id=? LIMIT 1)", [$group_id])
                             ->orderBy('created_at', 'desc')
                             ->paginate(5);
-        // return $group;
+        return $group;
         return view('group-post', compact('latest_topics', 'group'));
     }
 

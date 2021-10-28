@@ -31,6 +31,8 @@ class TopicDetailController extends Controller
                     ->where('topics.id', $id)
                     ->first();
 
+        // return $topic;
+
         if($topic == null) {
             return redirect()->route('home');
         }

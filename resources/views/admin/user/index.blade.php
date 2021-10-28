@@ -46,6 +46,7 @@
                                   <th>Nama</th>
                                   <th>No. Telp</th>
                                   <th width="30%">Jumlah Kiriman</th>
+                                  <th width="20%">Aksi</th>
                               </tr>
                           </thead>
 
@@ -59,6 +60,11 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->total_topic }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="openDeleteModal({{ $item->id }})">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
+                                    </td>
                                 </tr>
                               @endforeach
                           </tbody>
@@ -77,4 +83,18 @@
     </section>
     <!-- /.content -->
 
+    @include('admin.group.modal-delete')
 @endsection
+@push('js')
+    <script>
+        function  openDeleteModal(id) {
+            $.get("{{ route('admin.user.index') }}/"+id, (result) => {
+                if(result.length != 0) {
+                    $('#modalDelete form').attr('action', "{{ route('admin.user.index') }}/"+id);
+                    $('#modalDelete').modal('show');
+                }
+            })
+        }
+    </script>
+@endpush
+

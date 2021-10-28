@@ -25,6 +25,15 @@
         <div class="left-text">
 
             <div class="card" style="border-radius: 20px;">
+                @auth
+                    @if (auth()->user()->id == $topic->user_id)
+                        <div class="card-header">
+                            <div class="pull-right">
+                                <a href="{{ url()->current() }}/edit">Ubah</a>
+                            </div>
+                        </div>
+                    @endif
+                @endauth
                 <div class="card-body" style="padding: 20px;">
 
                     <h2 class="text-center mb-4">{{ $topic->title ?? "" }}</h2>

@@ -81,7 +81,7 @@
 
                             <div class="col-12">
                                 @foreach ($latest_topics as $item)
-                                    <a href="/t/{{ date("Y", strtotime($item->created_at)) }}{{ $item->id }}-{{ str_replace('+', '-', urlencode($item->title))  }}" class="card mb-3">
+                                    <a href="/t/{{ date("Y", strtotime($item->created_at)) }}{{ $item->id }}-{{ preg_replace ('/[^\p{L}\p{N}]/u', '-', str_replace('+', '-', urlencode($item->title)))  }}" class="card mb-3">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-lg-2 col-md-3 col-4 align-self-center text-center text-black"

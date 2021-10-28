@@ -83,7 +83,7 @@
 
                                             [$h, $i, $s] = $time_explode;
                                         @endphp
-                                        <a href="/t/{{ date('Y', strtotime($item->created_at)) }}{{ $item->id }}-{{ str_replace('+', '-', urlencode($item->title)) }}"
+                                        <a href="/t/{{ date('Y', strtotime($item->created_at)) }}{{ $item->id }}-{{ preg_replace ('/[^\p{L}\p{N}]/u', '-', str_replace('+', '-', urlencode($item->title))) }}"
                                             class="card mb-3">
                                             <div class="card-body">
                                                 <div class="row">

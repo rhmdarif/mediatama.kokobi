@@ -78,7 +78,7 @@
                                                 <td>{{ $item->created_at }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="{{ route('admin.topic.index') }}/{{ date('Y', strtotime($item->created_at)) }}{{ $item->id }}-{{ str_replace('+', '-', urlencode($item->title)) }}"
+                                                        <a href="{{ route('admin.topic.index') }}/{{ date('Y', strtotime($item->created_at)) }}{{ $item->id }}-{{ preg_replace ('/[^\p{L}\p{N}]/u', '-', str_replace('+', '-', urlencode($item->title))) }}"
                                                             class="btn btn-default">Lihat Detail</a>
                                                     </div>
                                                 </td>

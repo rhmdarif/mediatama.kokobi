@@ -32,7 +32,7 @@ class GroupController extends Controller
                             ->whereRaw("group_id = (SELECT id FROM groups WHERE id=? LIMIT 1)", [$group_id])
                             ->orderBy('created_at', 'desc')
                             ->paginate(5);
-        return $group;
+
         return view('group-post', compact('latest_topics', 'group'));
     }
 

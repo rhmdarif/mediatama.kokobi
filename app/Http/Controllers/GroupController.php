@@ -22,8 +22,9 @@ class GroupController extends Controller
     public function posts($group_id)
     {
         $group = DB::table('groups')->where("id", $group_id)->first();
+
         $latest_topics = DB::table('topics')
-                            ->select('*', "groups.name as group_name",
+                            ->select('*',
                                     DB::raw("IF(now() < expired_at, 'active', 'expired') as status"),
                                     DB::raw("timediff(now(), expired_at) as selisih"),
                                     DB::raw("(SELECT count(*) FROM topic_likes WHERE topic_id=topics.id AND type=1) as jumlah_like"),

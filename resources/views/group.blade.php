@@ -83,11 +83,11 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="{{ route('group.join') }}" method="post">
+            <form action="{{ route('group.join') }}" method="post" autocomplete="off">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="invite_code" placeholder="Eg. CDX6723">
+                        <input type="text" class="form-control" name="invite_code" placeholder="Eg. CDX6723" autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">

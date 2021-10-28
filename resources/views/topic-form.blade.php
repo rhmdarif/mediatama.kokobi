@@ -38,10 +38,10 @@
                             <label for="title">Berlaku Hingga</label>
                             <div class="row">
                                 <div class="col">
-                                    <input type="date" class="form-control" name="exp_date" value="{{ ($topic->expired_at)? substr($topic->expired_at, 0, 10) : "" }}" required>
+                                    <input type="date" class="form-control" name="exp_date" value="{{ (isset($topic) AND $topic->expired_at)? substr($topic->expired_at, 0, 10) : "" }}" required>
                                 </div>
                                 <div class="col">
-                                    <input type="time" class="form-control" name="exp_time" value="{{ ($topic->expired_at)? substr($topic->expired_at, 11, 5) : "" }}" required>
+                                    <input type="time" class="form-control" name="exp_time" value="{{ (isset($topic) AND $topic->expired_at)? substr($topic->expired_at, 11, 5) : "" }}" required>
                                 </div>
                             </div>
                         </div>

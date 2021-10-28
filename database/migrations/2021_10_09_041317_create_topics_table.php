@@ -16,7 +16,7 @@ class CreateTopicsTable extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('group_id');
+            $table->foreignId('group_id')->nullable();
             $table->string('title');
             $table->text('body');
             $table->integer('share_count')->default(0);

@@ -1,10 +1,12 @@
 @extends('layouts.auth')
 @section('contents')
 <div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
+    <div class="card-body">
         <!-- Nested Row within Card Body -->
         <div class="row">
-            <div class="col-lg-6 d-none d-lg-block" style="background: url({{ asset('assets/images/login.png') }});background-position: center;background-size: cover;"></div>
+            <div class="col-lg-6 d-none d-lg-block my-auto">
+                <img src="{{ asset('assets/images/logo-koko.png') }}" alt="" class="img-fluid w-100">
+            </div>
             <div class="col-lg-6">
                 <div class="p-5">
                     <div class="text-center">

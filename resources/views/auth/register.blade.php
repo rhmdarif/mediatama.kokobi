@@ -1,14 +1,17 @@
 @extends('layouts.auth')
 @section('contents')
 <div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
+    <div class="card-body">
         <!-- Nested Row within Card Body -->
         <div class="row">
-            <div class="col-lg-6 d-none d-lg-block" style="background: url({{ asset('assets/images/login.png') }});background-position: center;background-size: cover;"></div>
+            <div class="col-lg-6 d-none d-lg-block my-auto">
+                <img src="{{ asset('assets/images/logo-koko.png') }}" alt="" class="img-fluid w-100">
+            </div>
+            {{-- <div class="col-lg-6 d-none d-lg-block" style="background: url({{ asset('assets/images/logo-koko.png') }});background-position: center;background-size: cover;"></div> --}}
             <div class="col-lg-6">
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                        <h1 class="h4 text-gray-900 mb-4">Register</h1>
                     </div>
                     @include('components.validation-errors')
                     <form class="user" action="{{ route('register') }}" method="POST">
@@ -37,7 +40,7 @@
                     </form>
                     <hr>
                     <div class="text-center">
-                        <a class="small" href="{{ route('login') }}">Login in here!</a>
+                        <a class="small" href="{{ route('login') }}">have a Account? Login</a>
                     </div>
                 </div>
             </div>
